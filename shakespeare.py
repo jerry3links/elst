@@ -9,7 +9,7 @@ es = Elasticsearch(
 )
 
 def main():
-    myfile = open("D:\Workspace\sample_data_for_elst\qa_cut.json",'r').read()
+    myfile = open("D:\Workspace\sample_data_for_elst\data_shakespeare_cut.json",'r').read()
     rawdata = myfile.splitlines(True)
     i = 0
     json_str = ""
@@ -17,10 +17,8 @@ def main():
 
     for line in rawdata:
         line = ''.join(line.split())
-        # x = json.loads(line)
-        # y = trim_qa_pair(x)
 
-        header_str = '{"index":{"_index":"qa","_type":"qa_pair","_id":"' + str(i) + '"}}'
+        header_str = '{"index":{"_index":"shakespeare","_type":"line","_id":"' + str(i) + '"}}'
         header = json.loads(header_str)
         # print(header)
         # if line != "},":
@@ -38,7 +36,7 @@ def main():
             "speaker": "LEONTES",\
             "text_entry": "Exeunt"\
         }'
-        res = es.index(index='qa', doc_type='qa_pair', id=i, body=test)
+        res = es.index(index='shakespeare', doc_type='line', id=i, body=test)
 
         print(res['result'])
 
@@ -46,18 +44,6 @@ def main():
         if i > 0: break
     # print(json_str)
 
-def trim_qa_pair(x):
-    del x["question"]["content_digest_id"]
-    del x["question"]["intention_id"]
-    del x["question"]["message"]["uuid"]
-    del x["question"]["message"]["inst_id"]
-    del x["question"]["message"]["prep_content"]
-    del x["answer"]["content_digest_id"]
-    del x["answer"]["intention_id"]
-    del x["answer"]["message"]["uuid"]
-    del x["answer"]["message"]["inst_id"]
-    del x["answer"]["message"]["prep_content"]
-    return x
 
 if __name__ == '__main__':
     main()
