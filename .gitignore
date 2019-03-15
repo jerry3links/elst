@@ -107,5 +107,4 @@ venv.bak/
 *.jsonl
 
 # others
-.idea
-idea/
+**.idea/**
