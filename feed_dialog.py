@@ -106,6 +106,7 @@ def main():
     print("{} dialog, {} mobile dialog, {} pc dialog".format(cnt, obj_mobile_i, obj_pc_i))
 
 
+# reorg dialog
 def reorg_dialog(json_dct):
 
     data = {}
